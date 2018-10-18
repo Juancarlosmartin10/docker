@@ -5,7 +5,7 @@
 ## Default variables to use
 export INTERACTIVE=${INTERACTIVE:="true"}
 export PVS=${INTERACTIVE:="true"}
-export DOMAIN=${DOMAIN:="$(curl -s ipinfo.io/ip).nip.io"}
+export DOMAIN=${DOMAIN:="172.18.13.49"}
 export USERNAME=${USERNAME:="$(whoami)"}
 export PASSWORD=${PASSWORD:=password}
 export VERSION=${VERSION:="3.11"}
@@ -57,7 +57,7 @@ echo "* OpenShift version: $VERSION "
 echo "******"
 
 # install updates
-yum update -y
+#yum update -y
 
 # install the following base packages
 yum install -y  wget git zile nano net-tools docker-1.13.1\
@@ -69,7 +69,7 @@ yum install -y  wget git zile nano net-tools docker-1.13.1\
 				java-1.8.0-openjdk-headless "@Development Tools"
 
 #install epel
-yum -y install epel-release
+#yum -y install epel-release
 
 # Disable the EPEL repository globally so that is not accidentally used during later steps of the installation
 sed -i -e "s/^enabled=1/enabled=0/" /etc/yum.repos.d/epel.repo
@@ -81,7 +81,7 @@ if [ $? -eq 1 ]; then
 fi
 
 # install the packages for Ansible
-yum -y --enablerepo=epel install ansible pyOpenSSL
+#yum -y --enablerepo=epel install ansible pyOpenSSL
 
 [ ! -d openshift-ansible ] && git clone https://github.com/openshift/openshift-ansible.git
 
@@ -90,7 +90,7 @@ cd openshift-ansible && git fetch && git checkout release-3.11 && cd ..
 cat <<EOD > /etc/hosts
 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4 
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
-${IP}		$(hostname) console console.${DOMAIN}  
+${IP}		$(hostname) console console.${DOMAIN} ${DOMAIN} 
 EOD
 
 if [ -z $DISK ]; then 
@@ -132,7 +132,7 @@ if [ "$memory" -lt "8388608" ]; then
 	export LOGGING="False"
 fi
 
-curl -o inventory.download $SCRIPT_REPO/inventory.ini
+#curl -o inventory.download $SCRIPT_REPO/inventory.ini
 envsubst < inventory.download > inventory.ini
 
 # add proxy in inventory.ini if proxy variables are set

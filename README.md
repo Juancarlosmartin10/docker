@@ -12,21 +12,13 @@ This repository is a set of scripts that will allow you easily install the lates
 git clone https://github.com/Juancarlosmartin10/docker.git
 ```
 
-3.Install Ansible 2.6.5
-...
+3.Install Ansible 2.6.5 \n
+
 sudo rpm -iUvh https://releases.ansible.com/ansible/rpm/release/epel-7-x86_64/ansible-2.6.5-1.el7.ans.noarch.rpm
-...
+
 
 4. Execute the installation script
 
 ```
 cd installcentos
 ./install-openshift.sh
-
-
-## Automation
-
-
-## Development
-
-You must have installed 2.6.5 Ansible version. This Openshif Origin is not compatible with Ansible 2.7.0
